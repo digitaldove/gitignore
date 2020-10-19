@@ -2,7 +2,10 @@
   import Menu from "./components/Menu/Menu.svelte";
   import Footer from "./components/Footer/Footer.svelte";
 
+  import { getAllFiles } from "./client/github"
+
   export let name: string;
+  export const gitignoreFiles = getAllFiles()
 </script>
 
 <style>
@@ -36,9 +39,19 @@
   <h1>{name}</h1>
   <h2>Forever OpenSource</h2>
   <p>
-    Visit the
-    <a href="https://svelte.dev/tutorial">Svelte tutorial</a>
-    to learn how to build Svelte apps.
+    Templating the <code>.gitignore</code> for your liking.
   </p>
+  {#await gitignoreFiles}
+    <p>...waiting</p>
+  {:then files}
+    {#each files as file}
+      <!-- Parsing *.gitignores templates -->
+      {#if file.name.split('.').length === 2 && file.name.split('.')[1] === "gitignore"}
+        <p>{file.name}</p>
+      {/if}
+    {/each}
+  {:catch error}
+    <p style="color: red">{error.message}</p>
+  {/await}
 </main>
 <Footer />

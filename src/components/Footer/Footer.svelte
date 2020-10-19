@@ -8,6 +8,7 @@
         height: 200px;
         background-color: grey;
         width: 100%;
+        padding: 16px;
     }
     @media (min-width: 640px) {
     footer {
