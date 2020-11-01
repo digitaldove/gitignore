@@ -1,4 +1,5 @@
 <script lang="ts">
+  import AutoComplete from "./components/AutoComplete/AutoComplete.svelte"
   import Menu from "./components/Menu/Menu.svelte";
   import Footer from "./components/Footer/Footer.svelte";
 
@@ -41,6 +42,7 @@
   <p>
     Templating the <code>.gitignore</code> for your liking.
   </p>
+  <AutoComplete/>
   {#await gitignoreFiles}
     <p>...waiting</p>
   {:then files}
