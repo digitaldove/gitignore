@@ -3,10 +3,10 @@
   import Menu from "./components/Menu/Menu.svelte";
   import Footer from "./components/Footer/Footer.svelte";
 
-  import { getAllFiles } from "./client/github"
+  // import { getAllFiles } from "./client/github"
 
   export let name: string;
-  export const gitignoreFiles = getAllFiles()
+  // export const gitignoreFiles = getAllFiles()
 </script>
 
 <style>
@@ -43,17 +43,5 @@
     Templating the <code>.gitignore</code> for your liking.
   </p>
   <AutoComplete/>
-  {#await gitignoreFiles}
-    <p>...waiting</p>
-  {:then files}
-    {#each files as file}
-      <!-- Parsing *.gitignores templates -->
-      {#if file.name.split('.').length === 2 && file.name.split('.')[1] === "gitignore"}
-        <p>{file.name}</p>
-      {/if}
-    {/each}
-  {:catch error}
-    <p style="color: red">{error.message}</p>
-  {/await}
 </main>
 <Footer />
